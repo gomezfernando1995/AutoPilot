@@ -1,0 +1,7 @@
+{
+  "name": "AutoPilot",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
