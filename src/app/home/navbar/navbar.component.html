@@ -1,0 +1,62 @@
+
+
+<ion-header>
+  <div *ngIf="!(serviceAuth.actualUser$ | async); else elseBlock">
+    <ion-toolbar slot="end" size="large" color="primary"  >
+
+      <div *ngIf="isDesktop && !(serviceAuth.actualUser$ | async) "
+        class="container-btn-home">
+        <h1>AutoPilot</h1>
+        <a class="btn-home" routerLink="/home">Inicio</a>
+        <a class="btn-home" routerLink="/nosotros">Nosotros</a>
+        <a class="btn-home" routerLink="/contacto">Contacto</a>
+      </div>
+
+      <div slot="end" class="div-btn-auth" *ngIf="isDesktop; else elseBlock">
+        <ion-button routerLink="/autenticacion/registrar" fill="outline"
+          class="btn_nav registro" *ngIf="!(serviceAuth.actualUser$ | async)">Registrarse</ion-button>
+        <ion-button routerLink="/autenticacion/login" fill="solid"
+          class="btn_acceder btn_nav "
+          *ngIf="!(serviceAuth.actualUser$ | async)">Ingresar</ion-button>
+      </div>
+
+      <ng-template #elseBlock>
+
+        <ion-buttons slot="end">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title> AutoPilot</ion-title>
+      </ng-template>
+
+    </ion-toolbar>
+  </div>
+
+  <ng-template #elseBlock>
+    <ion-toolbar slot="end" size="large" color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <!-- <ion-avatar  slot="end">
+        <img class="perfil"  alt="avatar"  [src]="this.fotoPerfil" />
+      </ion-avatar> -->
+      <div class="cont-perfilMinYnombre" slot="end">
+        <ion-avatar class="cont-perfilMin"  aria-hidden="true" slot="start">
+          <img class="perfil" alt [src]="this.fotoPerfil" 
+            (click)="this.servicePerfil.setOpen(true)"
+          />
+        </ion-avatar>
+        <ion-label>{{ this.nombre }}</ion-label>
+      </div>
+        
+      
+
+      <div slot="end" class="div-btn-auth">
+        <ion-button fill="solid"
+          class="btn_acceder btn_nav "
+          *ngIf="serviceAuth.actualUser$ | async; let user" (click)="salir()">Salir</ion-button>
+      </div>
+
+    </ion-toolbar>
+  </ng-template>
+
+</ion-header>

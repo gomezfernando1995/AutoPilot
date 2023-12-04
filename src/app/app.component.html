@@ -1,3 +1,44 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+
+<app-navbar></app-navbar>
+
+ <!-- MUESTRA EL LOGIN Y EL REGISTRARSE SI ESTA LOGUEADO -->
+<div *ngIf="!isDesktop && !(authService.actualUser$ | async); else elseBlock">
+  <ion-menu side="end" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Autenticacion</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-menu-toggle>
+        <ion-list>
+          <ion-item routerLink="/home"><ion-icon name="home-outline"></ion-icon>Inicio</ion-item>
+          <ion-item routerLink="/autenticacion/login"><ion-icon name="person-outline"></ion-icon>Login</ion-item>
+          <ion-item routerLink="/autenticacion/registrar"><ion-icon name="person-add-outline"></ion-icon>Registrate</ion-item>
+        </ion-list>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+</div>
+ <!-- MUESTRA ESTE SI ESTA LOGUEADO -->
+<ng-template #elseBlock>
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-menu-toggle class="menu">
+        <ion-list>
+          <ion-item routerLink="/welcome"><ion-icon name="home"></ion-icon>Home</ion-item>
+          <ion-item routerLink="/auto"><ion-icon name="bar-chart"></ion-icon>Dashboard</ion-item>
+          <ion-item routerLink="/vehiculos"><ion-icon name="car-sport"></ion-icon>Vehiculos</ion-item>
+          <ion-item routerLink="/welcome"><ion-icon name="person"></ion-icon>Usuarios</ion-item>
+          <ion-item routerLink="/chat"><ion-icon name="chatbubbles"></ion-icon>Chats</ion-item>
+        </ion-list>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+</ng-template>
+<ion-router-outlet id="main"> </ion-router-outlet>

@@ -1,0 +1,193 @@
+
+<div class="cont-fondo"> <!-- CONTIENE EL FONDO !-->
+
+  <ion-card class="cont-principal">
+    <!-- CONTIENE AL TITULO Y AL CONTENEDOR DE CHATS Y MSJS !-->
+
+    <ion-card-content class="cont-body">
+
+      <!-- ESTE CONTIENE LOS CHATS Y LOS MSJS !-->
+      <div
+        [ngClass]="{'cont-chat-buscador': isDesktop, 'cont-chat-buscador-min': !isDesktop}">
+
+        <div class="buscador">
+          <ion-select class="input-searchUser" label="Buscar Usuario.."
+            label-placement="floating" fill="solid" [(ngModel)]="searchUser"
+            (ionChange)="crearChat(searchUser)">
+
+            <ion-select-option *ngFor="let user of usuarios$ | async"
+              [value]="user"
+              (click)="crearChat(user)">
+
+              {{ user.firstName }}
+
+            </ion-select-option>
+          </ion-select>
+        </div>
+
+        <!-- ************************************************  SELECCION DE USUARIO ************************************************ -->
+        <ion-card class="cont-lista-chats">
+          <ion-card-content>
+            <ng-container *ngIf="chats$ | async as chats">
+              <ng-container *ngIf="chats.length > 0; else noChatsMessage">
+
+                <ion-list>
+                  <ion-item *ngFor="let chat of chats$ | async" value="chat.id"
+                    class="item-background-color"
+                    [button]="true"
+                    detail="false"
+                    (click)="chatElegido(chat,true)"
+                    [ngClass]="{ 'selected': chat === selectedUsuario }">
+
+                    <ion-avatar aria-hidden="true" slot="start">
+                      <img class="img-chat"
+                        [src]="chat.userIds[0] === this.userUid ? chat.users[1].photoURL : chat.users[0].photoURL" />
+                    </ion-avatar>
+
+                    <ion-label>
+                      <strong> {{ chat.userIds[0] === this.userUid ?
+                        chat.users[1].displayName : chat.users[0].displayName }}
+                      </strong>
+                      <ion-note class="ion-text-wrap"> {{ chat.ultimoMensaje}}
+                      </ion-note>
+                    </ion-label>
+                    <div class="metadata-end-wrapper" slot="end">
+                      <ion-note> {{ chat.ultimoMensajeTiempo | displayHora}}</ion-note>
+                      <ion-icon name="chevron-forward"></ion-icon>
+                    </div>
+                  </ion-item>
+                </ion-list>
+
+              </ng-container>
+            </ng-container>
+
+            <ng-template #noChatsMessage>
+              <!-- Este mensaje se mostrará si no hay chats disponibles -->
+              <p>Selecciona un usuario para comenzar a chatear.</p>
+            </ng-template>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- ************************************************  CONTERNEDOR MENSAJE ************************************************ -->
+
+      <ion-card
+        *ngIf="isDesktop && this.usersService.flagUserSelect; else modalChatMessage"
+        class="cont-msj">
+        <div class="msj-header">
+
+          <div class="msj-header-cont-img">
+            <img class="msj-img"
+              [src]="selectedUsuario.userIds[0] === this.userUid ? selectedUsuario.users[1].photoURL : selectedUsuario.users[0].photoURL" />
+            <img alt>
+          </div>
+
+          <div class="msj-header-info">
+            <ion-label>
+              <strong class="name-msj">{{ selectedUsuario.userIds[0] ===
+                this.userUid ?
+                selectedUsuario.users[1].displayName :
+                selectedUsuario.users[0].displayName}}</strong>
+
+            </ion-label>
+
+          </div>
+          <div class="msj-header-icon">
+
+          </div>
+
+        </div>
+
+        <div class="msj-body">
+          <div *ngFor="let msj of chatMessage$ | async">
+            <div
+              [ngClass]="{'cont-message-right': msj.senderId === this.userUid , 'cont-message-left': msj.senderId !== userUid}">
+              <ion-note class="message"> {{msj.text}} </ion-note>
+              <ion-note class="time-message">
+                {{ msj.sentDate | displayHora }}
+              </ion-note>
+            </div>
+            <div #endOfChat></div>
+          </div>
+        </div>
+
+        <div class="msj-footer">
+          <ion-input [formControl]="mensajeCtrl" show-cancel-button="always"
+            (keydown.enter)="enviarMensaje()"
+            fill="solid" placeholder="Mensaje"></ion-input>
+          <div class="cont-enviar">
+            <ion-img (click)="enviarMensaje()" class="img-enviar"
+              src="../../assets/icon/enviar.png"
+              alt="enviar msj"></ion-img>
+          </div>
+        </div>
+
+      </ion-card>
+      <!--------------------     MODAL CHAT MESSEGE FOR PHONE --------------->
+      <ng-template #modalChatMessage>
+        <ion-content class="ion-padding">
+          <ion-modal [isOpen]="isModalOpen_ChatMessage">
+            <ng-template>
+              <ion-header>
+                <ion-toolbar color="primary">
+                  <!-- <ion-item color="primary" style="height: auto;">
+                  
+                  </ion-item> -->
+
+                  <ion-avatar slot="start">
+                    <img alt="perfil" class="chatMessager-photo"
+                      src="{{selectedUsuario.userIds[0] === this.userUid ? selectedUsuario.users[1].photoURL : selectedUsuario.users[0].photoURL}}" />
+                  </ion-avatar>
+                  <ion-label><strong class="chatMessager-name">{{
+                      selectedUsuario.userIds[0] ===
+                      this.userUid ?
+                      selectedUsuario.users[1].displayName :
+                      selectedUsuario.users[0].displayName}}</strong>
+                  </ion-label>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="setOpenModal_ChatMessage(false)"><ion-icon
+                        name="arrow-back-outline"></ion-icon></ion-button>
+                  </ion-buttons>
+
+                </ion-toolbar>
+              </ion-header>
+              <ion-content color="secondary">
+                <div class="msj-body-telephone">
+                  <div *ngFor="let msj of chatMessage$ | async">
+                    <div
+                      [ngClass]="{'cont-message-right-telephone': msj.senderId === this.userUid , 'cont-message-left-telephone': msj.senderId !== userUid}">
+                      <ion-note class="message"> {{msj.text}} </ion-note>
+                      <ion-note class="time-message">
+                        {{ msj.sentDate | displayHora }}
+                      </ion-note>
+                    </div>
+                    <div #endOfChat></div>
+                  </div>
+                </div>
+              </ion-content>
+              <div class="msj-footer">
+                <ion-input [formControl]="mensajeCtrl"
+                  show-cancel-button="always"
+                  (keydown.enter)="enviarMensaje()"
+                  fill="solid" placeholder="Mensaje"></ion-input>
+                <div class="cont-enviar">
+                  <ion-img (click)="enviarMensaje()" class="img-enviar"
+                    src="../../assets/icon/enviar.png"
+                    alt="enviar msj"></ion-img>
+                </div>
+              </div>
+            </ng-template>
+          </ion-modal>
+        </ion-content>
+      </ng-template>
+
+      <!-- ************************************************  CONTERNEDOR ASIDE ************************************************ -->
+      <div *ngIf="isDesktop && selectedUsuario">
+        <app-aside-chat > </app-aside-chat>
+      </div>
+    </ion-card-content>
+
+  </ion-card>
+
+</div>

@@ -1,0 +1,144 @@
+$verde-agua: #57f3a8;
+$rojo-tomate: #da4040;
+$background: #012b4b41 ;
+
+.isLoggin{
+  --background:#4b010d0a ;
+}
+.dontLoggin{
+  --background:#012b4b ;
+}
+// ---------------------------------- TITULO Y BOTONES SOBRE HOME,NOSOTROS, Y CONTACTO ----------------------------------
+
+h1{
+  font-size: 25px;
+  margin-top: 15px;
+  font-weight: 500;
+  margin-left: 10rem;
+  margin-right: 4rem;
+}
+
+.container-btn-home{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.btn-home{
+  text-decoration: none;
+  padding-left:3rem ;
+  font-size: 18px;
+  font-weight: 500;
+}
+.btn-home:hover{
+   color: #89faa1;;
+}
+
+// ---------------------------------- BOTONES DE REGISTRAR Y INICIAR SESION ----------------------------------
+
+.div-btn-auth{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border-radius: 10%;
+  height: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  
+}
+
+.perfil:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.perfil{
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  transition: transform 150ms ease-in-out;
+
+}
+
+.orientacion_derecha {
+  flex: 1 1 auto;
+}
+.mr {
+  margin-right: 3 rem;
+}
+a{
+  color:#57f3a8;
+}
+// 3 BOTONES PRINCIPALES
+.btn_nav{
+  --border-radius: 10px;
+  --height: 100%;
+  --padding-left: 3rem;
+  --padding-right: 1.5rem;
+  --font-family: "Poppins", sans-serif;
+  --font-size: rem;
+  --font-weight: 600;
+}
+// BTN DE ACCESO
+.btn_acceder{  
+  --background: #57f3a8;
+  --padding-top: 10px;
+  --padding-bottom: 10px; 
+  --color:#012b4b;
+}
+// BTN DE REGISTRO
+.registro { 
+  // --color: rgb(240, 240, 240) ;
+  // --padding-top: 10px;
+  // --padding-bottom: 10px;
+  // --border-color: #ffffff;
+  // --border-width: 1px;
+  --background:#da4040!important;
+  --color: rgb(255, 255, 255) !important;
+  
+}
+
+.cont-perfilMinYnombre{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right:3rem;
+}
+
+.cont-perfilMin{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+}
+
+
+
+
+  
+// --background: #93e9be;
+//   --background-hover: #9ce0be;
+//   --background-activated: #88f4be;
+//   --background-focused: #88f4be;
+
+//   --color: blue;
+
+//   --border-radius: 0;
+//   --border-color: #000;
+//   --border-style: solid;
+//   --border-width: 1px; 
+
+//   --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+//   --ripple-color: deeppink;
+
+//   --padding-top: 10px;
+//   --padding-bottom: 10px;

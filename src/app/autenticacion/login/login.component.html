@@ -1,0 +1,57 @@
+ <div class="container-papa">
+  <div class="container-card">
+
+    <ion-card>
+
+      <ion-card-header>
+        <div class="centrar">
+          <ion-card-title>Bienvenido</ion-card-title>
+          <ion-card-subtitle> Ingresa y gestiona tus vehiculos!</ion-card-subtitle>
+        </div>
+      </ion-card-header>
+
+      <div class="centrar container-google">
+        <ion-button (click)="loginGoogle()" color="danger">
+          <ion-thumbnail>
+            <img alt="Silhouette of mountains"
+              src="https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png" />
+          </ion-thumbnail>
+          Ingresar con Google
+        </ion-button>
+
+      </div>
+
+      <div class="divisor">
+        <div class="linea"> </div>
+        <p>O ingresa con tu cuenta</p>
+        <div class="linea"> </div>
+      </div>
+
+      <form class="row" [formGroup]="this.formUsuario">
+        <ion-card-content class="centrar">
+
+          <ion-input class="input color-label" label="Correo" formControlName="email"
+            label-placement="floating" type="email" fill="solid"
+            placeholder="Ingrese un correo..."></ion-input>
+
+          <ion-item  class="input" fill="solid"> 
+            <ion-input class="color-label" label="Contraseña" label-placement="floating" formControlName="password" [type]="inputType" 
+              [(ngModel)]="inputValue"></ion-input>
+            <ion-icon [name]="(inputType == 'password') ? 'eye' : 'eye-off'" slot="end"
+             
+              (click)="inputType = (inputType == 'password') ? 'text' : 'password';"></ion-icon>
+          </ion-item>
+
+        </ion-card-content>
+        <div class="cont-iniciarSesion centrar">
+          <ion-button (click)="login()" value="Login" class="btn-ingresar"
+            [disabled]="!this.formUsuario.valid">Iniciar Sesion</ion-button>
+        </div>
+
+      </form>
+
+    </ion-card>
+
+  </div>
+
+</div>

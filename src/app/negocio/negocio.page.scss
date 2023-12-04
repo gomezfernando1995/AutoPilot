@@ -1,0 +1,12 @@
+$fondo: #01192c;
+$azulnav: #012b4b;
+$verde-fluor: #64f3af;
+
+.cont-fondo {
+  background-color: $fondo;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,20 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="contenedor_fondo">
+
+
+    <video autoplay loop muted playsinline class="cont-video">
+      <source src="assets/video/autopilot.mp4" type="video/mp4">
+    
+    </video>
+
+    <div [ngClass]="{'cont-presentation': isDesktop, 'cont-presentation-telephone': !isDesktop} " >
+        <!-- <h1 class="titulo" >Tu vehículo, tu control. ¡Bienvenido!"</h1> -->
+        <div [ngClass]="{'cont-titulo': isDesktop, 'cont-titul-telephone': !isDesktop} ">
+
+          <h2 [ngClass]="{'titulo': isDesktop, 'titulo-phone': !isDesktop} ">AutoPilot gestión vehicular simple y rápida.  </h2>
+
+        </div>
+    </div>
+    
+  
+    <!-- <img src="../../assets/img/taller.jpg" alt="taller"> -->
   </div>
 </ion-content>

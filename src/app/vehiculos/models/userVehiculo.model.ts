@@ -1,0 +1,22 @@
+export interface userVehiculo {
+  uid:string,
+  displayName:string,
+  marca:string,
+  modelo:string,
+  tipo:string,
+  patente:string,
+  photoURL:string,
+  cantidad_totalTanqueCombustible:string, 
+  tipoCombustible:string,
+  cantidad_ultimaCargaCombustible:string,
+  cantidad_actualCargaCombustible:string,
+  fecha_ultimaCargaCombustible:string,
+  tipoAceite:string,
+  cantidad_totalAceite:string,
+  cantidad_UltimaCargaAceite:string,
+  fecha_ultimaCargaAceite:string,
+  fecha_ultimoCambioFiltroDeAire:string,
+  tipoFiltroDeAire:string,
+  fecha_cambioDistribucion:string
+  kilometraje:string;
+}

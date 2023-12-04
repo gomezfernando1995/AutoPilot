@@ -1,0 +1,97 @@
+$background: #012b4b ;
+$verde-agua:#57f3a8 ;
+$verde-agua-hover:#50e99f;
+
+.container-papa{
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100rem;
+    background-color: #02233d;
+}
+
+.container-card{
+    margin: 20px;
+    margin-top: 5rem;
+    width:  30rem;
+    // background-color: red;
+}
+.centrar{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+ion-input{
+    margin-top:10px;
+    width: 80%;
+}
+
+// ************************************************ SECTOR TITULO ************************************************
+
+
+ion-card-title{
+    font-size: 30px;
+    text-align: center;
+}
+
+ion-card-subtitle{
+    margin-top: 10px;;
+    font-size: 17px;
+    text-align: center;
+}
+
+
+// ************************************************ SECTOR INICIO DE SESION ************************************************
+
+.cont-iniciarSesion{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.btn-ingresar{
+        width: 14rem;
+        font-size: 17px;
+        font-weight: 500;
+        --background: #57f3a8;
+        color  :black;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.btn-ingresar:hover{
+    --background: #50e99f;
+}
+
+// ************************************************ SECTOR GOOGLE ************************************************
+
+ion-thumbnail {
+    --size: 30px;
+    --border-radius: 14px;
+    margin-right:5px
+  }
+
+
+// ************************************************  COMPONENTE DIVISOR  *********************************************
+
+.divisor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.divisor p{
+    font-size: 18px;
+    color: #012b4b;
+    margin-left:5px;
+    margin-right:5px;
+    text-align: center;
+}
+.linea{
+    height: 2px;
+    width: 20%;
+    border-top: 1px solid #585858; /* Línea divisoria personalizada */
+    margin: 10px 0; /* Margen superior e inferior para separación */
+}
+
+// *********************************************************************************************************************

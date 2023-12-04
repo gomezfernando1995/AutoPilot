@@ -1,0 +1,300 @@
+
+<div class="cont-fondo"> <!-- CONTIENE EL FONDO !-->
+
+  <div class="cont-padre">
+
+    <ion-modal trigger="open-modal">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancelar</ion-button>
+            </ion-buttons>
+            <ion-title>Agregar un vehiculo</ion-title>
+            <ion-buttons slot="end">
+              <ion-button [disabled]="!this.vehiculoForm.valid"
+                (click)="confirm()" [strong]="true">Agregar</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button (click)="cargar()" [strong]="true">cargar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <form class="form-altaAuto" [formGroup]="vehiculoForm">
+              <!-- ********************************************************************** -->
+
+              <ion-select class="input"
+                label="Seleccione marca.."
+                label-placement="floating" fill="solid"
+                formControlName="marca"
+                (ionChange)="marcaSelected()">
+                <ion-select-option
+                  *ngFor="let vehiculo of vehiculos$ | async  filtrarDuplicadoPipe"
+                  [value]="vehiculo.marca">
+                  {{ vehiculo.marca }}
+                </ion-select-option>
+              </ion-select>
+              <!-- ********************************************************************** -->
+
+              <ion-select class="input"
+                label="Seleccione modelo.."
+                label-placement="floating" fill="solid"
+                formControlName="modelo">
+
+                <ion-select-option
+                  *ngFor="let  modelo of modelosFiltrados$ | async">
+                  {{ modelo}}
+                </ion-select-option>
+              </ion-select>
+              <!-- ********************************************************************** -->
+
+              <ion-select class="input"
+                formControlName="tipo"
+                label="Seleccione tipo de vehiculo.."
+                label-placement="floating" fill="solid">
+                <ion-select-option
+                  *ngFor="let  tipo of tipo">
+                  {{ tipo }}
+                </ion-select-option>
+              </ion-select>
+              <!-- ********************************************************************** -->
+
+              <ion-input class="input custom-placeholder"
+                label="Patente"
+                formControlName="patente"
+                label-placement="floating" type="input" fill="solid"
+                placeholder="Ingrese patente..."></ion-input>
+
+              <ion-input class="input custom-placeholder"
+                label="Kilometraje"
+                formControlName="kilometraje"
+                label-placement="floating" type="input" fill="solid"
+                placeholder="Ingrese Kilometraje..."></ion-input>
+
+            </form>
+            <div>
+
+            </div>
+
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <div class="cont-sidebar" *ngIf="isDesktop">
+
+    </div>
+
+    <div class="cont-body">
+      <h2 class="saludo">Bienvenido otra vez, Fernando! </h2>
+      <!-- ACA VA EL CONTENEDOR DE TODO EL BODY, TANTO LOS VEHICULOS E INFORMACION -->
+
+      <div class="cont-vehiculo"> <!-- ACA VA EL SELECTOR DE VEHICULOS -->
+
+        <div class="cont-cont-vehiculo">
+          <ion-card *ngIf="isDesktop" ionclick="this.abrirForm()"
+            class="card-add"
+            id="open-modal" expand="block">
+            <h2>Agregar Vehiculo</h2>
+            <img alt="agregar auto" src="../../assets/img/add-car.png" />
+
+          </ion-card>
+
+          <div *ngFor="let vehiculo of userVehiculos$! | async; let i = index ">
+            <div *ngIf="i < 4 && isDesktop; else elseBlock">
+              <ion-card ionclicK class="card-car"
+                id="open-modal" expand="block"
+                (click)="seleccionarVehiculo(vehiculo)"
+                [ngClass]="{ 'selected': vehiculo === selectedVehiculo }">
+                <strong>{{ vehiculo.marca}}</strong>
+                <ion-card-subtitle>{{ vehiculo.modelo }}</ion-card-subtitle>
+
+                <img class="car-img" [src]=" vehiculo.photoURL" />
+
+                <div class="car-info">
+                  <h3> Patente: {{ vehiculo.patente}} </h3>
+                  <h3>Kilometraje: {{ vehiculo.kilometraje}} KM</h3>
+                </div>
+
+              </ion-card>
+            </div>
+            <ng-template #elseBlock>
+
+              <ion-card *ngIf="i < 1" ionclick class="card-car-min"
+                id="open-modal" expand="block">
+                <strong>{{ vehiculo.marca}}</strong>
+                <ion-card-subtitle>{{ vehiculo.modelo }}</ion-card-subtitle>
+
+                <img class="car-img" [src]=" vehiculo.photoURL" />
+                <div class="car-info">
+                  <h3> Patente: {{ vehiculo.patente}} </h3>
+                  <h3>Kilometraje: {{ vehiculo.kilometraje}} KM</h3>
+                </div>
+              </ion-card>
+            </ng-template>
+          </div>
+          <!-- <ion-fab-button side="end">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button> -->
+
+        </div>
+
+      </div>
+      <div class="cont-info">
+        <div class="cont-cont-info"
+          *ngIf="isDesktop && selectedVehiculo; else elseBlock">
+          <!-- // Estatus general del vehiculo -->
+          <ion-card class="card-container-info">
+            <ion-card-header>
+              <ion-card-title>Estatus General
+              </ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <div class="separacion">
+                <div class="editar-nafta">
+
+                  <ion-card-title>Nafta - {{ this.cargaTotalCombustible}}Lts
+                  </ion-card-title>
+                  <ion-fab-button id="present-alert"
+                    (click)="this.actualizarCombustible()" size="small">
+                    <ion-icon name="pencil"></ion-icon>
+
+                    <ion-alert
+                      trigger="present-alert"
+                      header="Ingrese nuevo combustible:"
+                      [buttons]="alertButtons"
+                      [inputs]="alertInputs"></ion-alert>
+
+                  </ion-fab-button>
+                </div>
+                <div class="contenedor-barra">
+                  <!-- <div class="barra-total"
+                    [style.width.%]="(ultimaCargaCombustible / cargaTotalCombustible) * 100"></div>
+                  <div class="barra-ultima-carga"
+                    [style.width.%]="(ultimaCargaCombustible / cargaTotalCombustible) * 100"></div> -->
+
+                  <div class="barra-total"
+                    [style.width]="(ultimaCargaCombustible / cargaTotalCombustible * 100) + '%'"></div>
+                  <div class="barra-ultima-carga"
+                    [style.width]="(ultimaCargaCombustible / cargaTotalCombustible * 100) + '%'"></div>
+
+                </div>
+                <!-- <div class="porcentaje-total">{{ cargaTotal }} litros</div>
+                <div class="porcentaje-carga">{{ ultimaCarga }} litros</div> -->
+              </div>
+              <div class="separacion">
+                <div class="editar-nafta">
+                  <ion-card-title>Aceite -{{ this.cargaTotalAceite}}Lts</ion-card-title>
+                  <ion-fab-button expand="block" size="small">
+                    <ion-icon name="pencil"></ion-icon>
+                  </ion-fab-button>
+                </div>
+                <div class="contenedor-barra">
+                  <div class="barra-total"
+                    [style.width.%]="(ultimaCargaAceite / cargaTotalAceite) * 100"></div>
+                  <div class="barra-ultima-carga"
+                    [style.width.%]="(ultimaCargaAceite / cargaTotalAceite) * 100"></div>
+                </div>
+              </div>
+              <div class="separacion">
+                <div class="editar-nafta">
+                  <ion-card-title>Agua-{{ this.cargaTotalAgua }}Lts</ion-card-title>
+                  <ion-fab-button size="small">
+                    <ion-icon name="pencil"></ion-icon>
+                  </ion-fab-button>
+                </div>
+                <div class="contenedor-barra">
+                  <div class="barra-total"
+                    [style.width.%]="(ultimaCargaAgua / cargaTotalAgua) * 100"></div>
+                  <div class="barra-ultima-carga"
+                    [style.width.%]="(ultimaCargaAgua / cargaTotalAgua) * 100"></div>
+                </div>
+              </div>
+
+            </ion-card-content>
+          </ion-card>
+
+          <!-- // Datos Generales del Vehiculo -->
+          <ion-card class="card-container-info">
+            <ion-card-header>
+              <ion-card-title>Datos Generales del Vehiculo</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content class="cont-datosGeneralesVehiculo">
+
+              <div class="column">
+                <div class="separacion-datos">
+                  <ion-card-title>Marca</ion-card-title>
+                  <h2>{{ selectedVehiculo.marca }}</h2>
+                </div>
+                <div class="separacion-datos">
+                  <ion-card-title>Tipo de Combustible</ion-card-title>
+                  <h2>{{ selectedVehiculo.tipoCombustible }}</h2>
+                </div>
+                <div class="separacion-datos">
+                  <ion-card-title>Tipo de Filtro de Aire</ion-card-title>
+                  <h2>{{ selectedVehiculo.tipoFiltroDeAire }}</h2>
+                </div>
+
+              </div>
+
+              <div class="column">
+
+                <div class="separacion-datos">
+                  <ion-card-title>Modelo</ion-card-title>
+                  <h2>{{ selectedVehiculo.modelo }}</h2>
+                </div>
+                <div class="separacion-datos">
+                  <ion-card-title>Tipo de Vehiculo</ion-card-title>
+                  <h2>{{ selectedVehiculo.tipo }}</h2>
+                </div>
+                <div class="separacion-datos">
+                  <ion-card-title>Tipo de Aceite</ion-card-title>
+                  <h2>{{ selectedVehiculo.tipoAceite }}</h2>
+                </div>
+
+              </div>
+
+            </ion-card-content>
+          </ion-card>
+
+          <!-- // Datos Personales del Vehiculo -->
+          <ion-card class="card-container-info">
+            <ion-card-header>
+              <ion-card-title>Datos Personales del Vehiculo</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <div class="separacion">
+                <ion-card-title>Dueño</ion-card-title>
+                <h2>{{ selectedVehiculo.displayName }}</h2>
+              </div>
+              <div class="separacion">
+                <ion-card-title>Patente</ion-card-title>
+                <h2>{{ selectedVehiculo.patente }}</h2>
+              </div>
+              <div class="separacion">
+                <ion-card-title>Kilometraje</ion-card-title>
+                <h2>{{ selectedVehiculo.kilometraje }}</h2>
+              </div>
+
+            </ion-card-content>
+          </ion-card>
+
+        </div>
+        <ng-template #elseBlock>
+          <div class="cont-cont-info-min">
+
+          </div>
+        </ng-template>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,286 @@
+$fondo: #01192c;
+$azulnav: #012b4b;
+$verde-fluor: #64f3af;
+
+.cont-fondo {
+  background-color: $fondo;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cont-padre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  // background-color: white;
+  width: 98%;
+  height: 92vh;
+  border-radius: 10px;
+}
+
+// ****************************** SECCION SIDEBAR ********************************
+
+.cont-sidebar {
+  width: 12%;
+  height: 85vh;
+  background-color: $fondo;
+  // background-color: white;
+}
+
+// ****************************** SECCION BODY ********************************
+
+.cont-body {
+  width: 88%;
+  height: 92vh;
+  background-color: $azulnav;
+}
+.saludo {
+  font-size: 25px;
+  margin-left: 3rem;
+  margin-top: 2rem;
+  color: white;
+}
+.cont-vehiculo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $azulnav;
+  width: 100%;
+}
+
+.cont-cont-vehiculo {
+  display: flex;
+  align-items: center;
+  // background-color: #ffffff;
+  width: 97%;
+  border-radius: 22px 22px 22px 22px;
+}
+.card-add {
+  margin: 15px;
+  width: 17rem;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  background-color: rgba(230, 230, 230, 0.945);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  color: $fondo;
+  transition: transform 150ms ease-in-out;
+}
+.card-add:hover {
+  background-color: rgba(238, 237, 237, 0.945);
+  transform: scale(1.05);
+}
+
+.card-car {
+  margin: 15px;
+  width: 18rem;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.945);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  color: $fondo;
+  transition: transform 150ms ease-in-out;
+}
+.card-car-min {
+  margin: 15px;
+  width: 17rem;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.945);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  color: $fondo;
+  transition: transform 150ms ease-in-out;
+}
+.card-car:hover {
+  background-color: rgba(245, 245, 245, 0.945);
+  transform: scale(1.05);
+}
+
+.car-img{
+  width:  11rem;
+  height: 8.5rem;
+}
+strong{
+  font-size: 1.1rem;
+}
+.car-info{
+  // background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+ padding: 0;
+  width: 100%;
+  height:3rem;
+}
+
+.selected {
+  border: 2px solid rgb(95, 95, 95); /* Cambia el estilo de borde según tus preferencias */
+  box-shadow: 0 0 5px rgb(155, 155, 155); /* Agrega una sombra */
+}
+
+
+
+// **************************************** CONTENEDOR DE INFORMACION DE VEHICULO ****************
+
+.cont-info {
+  width: 100%;
+  background-color: $azulnav;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cont-cont-info {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  // background-color: #ffffff;
+  width: 97%;
+  height: 52vh;
+  border-radius: 50px;
+}
+
+.cont-cont-info-min{
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  // background-color: #ffffff;
+  width: 97%;
+  height: 48vh;
+  border-radius: 22px 22px 22px 22px;
+}
+
+.contenedor-barra {
+  width: 100%;
+  height: 20px;
+  background-color:  #5e8b75;
+  margin: 10px;
+  position: relative;
+  overflow: hidden; /* Oculta el desbordamiento de la barra de última carga */
+}
+
+.barra-total {
+  height: 100%;
+  background-color:  #64f3af;
+  width: 0;
+  transition: width 0.5s linear; 
+}
+
+
+.barra-ultima-carga {
+   height: 100%;
+  background-color: #64f3af;
+  width: 0;
+  transition: width 0.1s linear;
+}
+
+.cont-datosGeneralesVehiculo{
+  margin-top:5px;
+  display: flex;
+  flex-wrap: wrap;
+ 
+}
+.card-container-info{
+  width: 30rem;
+  height: 50vh;
+  border-radius: 30px;
+}
+
+ion-card-header{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background-color: #e6e6e6;
+}
+
+
+
+.editar-nafta{
+  display: flex;
+  flex-direction: row;
+    // justify-content:center;
+  align-items: center;
+}
+
+ion-fab-button{
+  margin-left: 20px;
+  width: 25px;
+  height: 25px;
+}
+ion-icon{
+  width: 15px;
+}
+.separacion-datos{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  margin-top: 10px;
+
+}
+
+.column{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+}
+
+
+// **************************************** FORMULARIO MODAL ****************
+.form-altaAuto {
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  flex-direction: column;
+  width: 95%;
+  height: 50vh;
+  // background-color: red;
+}
+
+
+.input{
+  margin-top:10px;
+  width: 80%;
+}
+
+
+
+ion-modal::part(backdrop) {
+  background: rgb(9, 13, 20);
+  opacity: 1;
+}
+
+ion-modal ion-toolbar {
+  --background: #012b4b;
+  --color: #64f3af;
+ 
+}
+
+ion-modal {
+  --height: 60%;
+  // --border-radius: 16px;
+  // --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.custom-placeholder::before {
+  padding: 0 8px; /* Ajusta la cantidad de relleno según tus preferencias */
+}
